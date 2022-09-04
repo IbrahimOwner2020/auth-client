@@ -1,13 +1,21 @@
-import React, { FC } from "react";
+import React, { FC, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.scss";
+import { routes } from "./routes";
 
 const App: FC = () => {
 	return (
-		<div className="container">
-			<h1 className="container-title">
-				This is the testing of the authentication site
-			</h1>
-		</div>
+		<Suspense fallback={<p>loading...</p>}>
+			<Routes>
+				{routes.map((el, index) => (
+					<Route
+						path={el.path}
+						key={index}
+						element={<el.element />}
+					/>
+				))}
+			</Routes>
+		</Suspense>
 	);
 };
 
